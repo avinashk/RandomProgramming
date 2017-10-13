@@ -17,7 +17,7 @@ public class AtoThePowerB {
         if (a == 1) {
             return 1;
         }
-        boolean isNegPower = false;
+        boolean isNegPower=false;
 
         if (b < 0) {
             isNegPower = true;

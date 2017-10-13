@@ -11,6 +11,15 @@ public class FizzBuzz {
             } else {
                 System.out.println(i);
             }
+
         }
+
+        String xForwardedFor ="1.2.3.4,1.4.5.6";
+        System.out.println(xForwardedFor.substring(0, xForwardedFor.indexOf(",")));
+
     }
 }
+
+
+
+
