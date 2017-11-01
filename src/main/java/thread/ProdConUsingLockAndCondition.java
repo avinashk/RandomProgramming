@@ -44,35 +44,39 @@ class ProducerConsumerCheck {
 
     public void produce() throws InterruptedException {
         int count = 0;
-        lock.lock();
-        while (count < 10) {
-            if (produced) {
-                cond.await();
-            } else {
-                System.out.println("Avinash");
-                count++;
-                produced = true;
-                cond.signal();
+        try {
+            lock.lock();
+            while (count < 10) {
+                if (produced) {
+                    cond.await();
+                } else {
+                    System.out.println("Avinash");
+                    count++;
+                    produced = true;
+                    cond.signal();
+                }
             }
+        } finally {
+            lock.unlock();
         }
-        lock.unlock();
-
     }
 
     public void consume() throws InterruptedException {
         int count = 0;
-        lock.lock();
-        while (count < 10) {
-            if (produced) {
-                System.out.println("Kumar");
-                produced = false;
-                count++;
-                cond.signal();
-            } else {
-                cond.await();
+        try {
+            lock.lock();
+            while (count < 10) {
+                if (produced) {
+                    System.out.println("Kumar");
+                    produced = false;
+                    count++;
+                    cond.signal();
+                } else {
+                    cond.await();
+                }
             }
+        } finally {
+            lock.unlock();
         }
-
     }
-
 }
